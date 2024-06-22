@@ -10,18 +10,14 @@ namespace gerenciador_estacionamento.Models
     public class Estacionamento
     {
         List<string> veiculos = new();
-        int veiculoId = 1;
         public void AdicionarVeiculos()
         {
-
-            Console.WriteLine("Informe seu nome: ");
-            string nome = Console.ReadLine();
 
             Console.WriteLine("Informe placa do veículo: ");
             string placa = Console.ReadLine();
 
-            veiculos.Add($"{veiculoId} | {nome} | {placa} ");
-            veiculoId++;
+            veiculos.Add(placa);
+
         }
 
         public void ListarVeiculos() 
@@ -43,13 +39,30 @@ namespace gerenciador_estacionamento.Models
             Console.WriteLine("Informe a placa do carro que deseja remover: ");
             string placa = Console.ReadLine();
 
-            if (veiculos.Remove(placa))
+            string placaVeiculo = null;
+
+            foreach (var item in veiculos) 
             {
-                Console.WriteLine($"Veiculo com placa {placa} removido com sucesso!");
+                if(veiculos.Contains(placa))
+                {
+                    placaVeiculo = item;
+                    break;
+                }
             }
-            else { Console.WriteLine($"Placa {placa} não encontrada."); }
-           
-       
+
+            if(placaVeiculo != null)
+            {
+                veiculos.Remove(placaVeiculo);
+                Console.WriteLine($"Veiculo {placa} removido com sucesso!");
+            }
+            else
+            {
+                Console.WriteLine("Nenhum veiculo encontrado.");
+            }
+          
+            
+            ListarVeiculos();
+
         }
 
 
