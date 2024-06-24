@@ -9,24 +9,37 @@ namespace gerenciador_estacionamento.Models
 {
     public class Estacionamento
     {
-        List<string> veiculos = new();
+        List<Veiculos> veiculos = new();
+        int idVeiculo = 1;
         public void AdicionarVeiculos()
         {
 
-            Console.WriteLine("Informe placa do veículo: ");
+            Console.WriteLine("Informe o modelo do veiculo: ");
+            string modeloVeiculo = Console.ReadLine();
+            Console.WriteLine("Informe o placa do veiculo: ");
             string placa = Console.ReadLine();
 
-            veiculos.Add(placa);
+            veiculos.Add(new Veiculos()
+            {
 
+                IdVeiculo = idVeiculo,
+                ModeloVeiculo = modeloVeiculo,
+                Placa = placa
+
+            });
+
+            idVeiculo++;
         }
 
         public void ListarVeiculos() 
         {
             if (veiculos.Any())
             {
-                foreach (var item in veiculos)
+                Console.WriteLine();
+
+                foreach (var veiculo in veiculos)
                 {
-                    Console.WriteLine(item + "\n");
+                    Console.WriteLine(veiculo);
                 }
 
             }
@@ -36,31 +49,15 @@ namespace gerenciador_estacionamento.Models
 
         public void RemoverVeiculo()
         {
-            Console.WriteLine("Informe a placa do carro que deseja remover: ");
-            string placa = Console.ReadLine();
+            Console.WriteLine("Informe o id do carro que deseja remover: ");
+            int veiculoId = Convert.ToInt32(Console.ReadLine());
 
-            string placaVeiculo = null;
+            veiculos.Remove(new Veiculos()
+            {
+                IdVeiculo = veiculoId,
 
-            foreach (var item in veiculos) 
-            {
-                if(veiculos.Contains(placa))
-                {
-                    placaVeiculo = item;
-                    break;
-                }
-            }
+            });
 
-            if(placaVeiculo != null)
-            {
-                veiculos.Remove(placaVeiculo);
-                Console.WriteLine($"Veiculo {placa} removido com sucesso!");
-            }
-            else
-            {
-                Console.WriteLine("Nenhum veiculo encontrado.");
-            }
-          
-            
             ListarVeiculos();
 
         }

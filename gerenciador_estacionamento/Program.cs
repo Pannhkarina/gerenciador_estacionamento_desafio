@@ -1,8 +1,11 @@
 ﻿using gerenciador_estacionamento.Models;
 
+
 decimal precoPorHora;
 
 Estacionamento estacionamento = new();
+
+
 
 Console.WriteLine("Olá, seja bem vindo ao estacionamento Relâmpago Mcqueen!\n" +
                   "Informe o preço inicial: ");
